@@ -3,33 +3,6 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import Highlighter from 'react-highlight-words';
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Joe Black',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Jim Green',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park',
-  },
-];
-
 const TableView = ({ data }) => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
@@ -143,6 +116,13 @@ const TableView = ({ data }) => {
       dataIndex: 'score',
       key: 'score',
       ...getColumnSearchProps('score'),
+    },
+    {
+      width: '5%',
+      title: 'Odds Line',
+      dataIndex: 'bet365OddsHandicap',
+      key: 'bet365OddsHandicap',
+      ...getColumnSearchProps('bet365OddsHandicap'),
     },
 		{
       title: 'Home Name',
