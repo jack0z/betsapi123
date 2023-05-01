@@ -63,7 +63,7 @@ const APICall = () => {
 										// quarter: `${detailedData.timer.q} ${(detailedData.extra.numberofperiods !== '4' ? '2H' : '')}`,
 										quarter: `${detailedData.timer.q}`,
 										foulsHome: detailedData.stats.fouls[0],
-										foulsAway: detailedData.stats.fouls[0],
+										foulsAway: detailedData.stats.fouls[1],
 										points2Home: detailedData.stats['2points'][0],
 										points2Away: detailedData.stats['2points'][1],
 										points3Home: detailedData.stats['3points'][0],

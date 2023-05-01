@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
 import styled from 'styled-components'
 
@@ -155,11 +155,12 @@ const TableView = ({ data }) => {
       ...getColumnSearchProps('timerString'),
     },
 		{
-      width: '5%',
+      width: '7%',
       title: 'Fouls Home',
       dataIndex: 'foulsHome',
       key: 'foulsHome',
       ...getColumnSearchProps('foulsHome'),
+      render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
     },
 		{
       width: '5%',
@@ -167,6 +168,7 @@ const TableView = ({ data }) => {
       dataIndex: 'foulsAway',
       key: 'foulsAway',
       ...getColumnSearchProps('foulsAway'),
+      render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
     },
 		{
       width: '5%',
