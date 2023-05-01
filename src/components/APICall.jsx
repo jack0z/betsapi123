@@ -118,14 +118,17 @@ const APICall = () => {
 		.catch(e => console.error('Have error: ', e))
 	}
 
-	const updateObjectInArray = (arr, updatedObj) => {
-		return arr.map(obj => {
-			if (obj.id === updatedObj.id) {
-				return updatedObj;
-			}
-			return obj;
-		});
-	}
+	const totalWorldMatches = allWorldMatches.length
+	const totalUSAMatches = allUSAMatches.length
+
+	// const updateObjectInArray = (arr, updatedObj) => {
+	// 	return arr.map(obj => {
+	// 		if (obj.id === updatedObj.id) {
+	// 			return updatedObj;
+	// 		}
+	// 		return obj;
+	// 	});
+	// }
 
 	const getBet365Odds = (stateMatches) => {
 		const matchesWithOdds = [];
@@ -161,17 +164,21 @@ const APICall = () => {
 	const filterData = (filters, data = null) => {
 		const matchesToFilter = data ? data : (showFor === 'world' ? allWorldMatches : allUSAMatches)
 		return matchesToFilter.filter(item => {
-			let spreadPassed = !filters.includes('spread') || (Math.abs(item.scoreDiff) >= 3 && Math.abs(item.scoreDiff) <= 10);
-			let totalsPassed = !filters.includes('totals') || (item.bet365Odds && item.bet365OddsHandicap && parseInt(item.bet365OddsHandicap) - item.scoreTotal < 17);
+			let spreadPassed = !filters.includes('spread') || (Math.abs(item.scoreDiff) >= 3 && Math.abs(item.scoreDiff) <= 10)
+			// Calculae team any tema fouls to be at least 4
+			console.log('Bonus check: ', parseInt(item.foulsHome), parseInt(item.foulsAway))
+			let bonusPassed = !filters.includes('bonus') || (parseInt(item.foulsHome) >= 4 || parseInt(item.foulsAway) >= 4)
+			let totalsPassed = !filters.includes('totals') || (item.bet365Odds && item.bet365OddsHandicap && parseInt(item.bet365OddsHandicap) - item.scoreTotal < 17)
 			// let totalsPassed = true;
-			let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '4' && parseInt((item.timer.tm) >= 4));
-			// let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '3');
-			return spreadPassed && totalsPassed && timePassed;
+			let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '4' && parseInt((item.timer.tm) >= 4))
+			// let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '3')
+			return spreadPassed && totalsPassed && timePassed && bonusPassed
 		});
 	}
 
 	const options = [
-		{ label: 'Spread 3-10', value: 'spread'}, 
+		{ label: 'Spread 3-10', value: 'spread'},
+		{ label: 'Bonus (4+)', value: 'bonus'},
 		{ label: 'Game Totals vs Score < 17', value: 'totals'}, 
 		{ label: '4th Q 4min', value: 'time'}, 
 	]
@@ -179,7 +186,7 @@ const APICall = () => {
 	console.log('matchesToShow:', matchesToShow)
 	return (
 		<div>
-			<p>Last refresh on: {lastRefresh}</p> <Button onClick={() => updateData()}>Update results (USA: {allUSAMatches.length}, REST: {allWorldMatches.length})</Button>
+			<p>Last refresh on: {lastRefresh}</p> <Button onClick={() => updateData()}>Update results (USA: {totalUSAMatches}, REST: {totalWorldMatches})</Button>
 			<Button className={`${showFor === 'USA' ? 'selected' : null}`} onClick={() => setShowFor('USA')}>USA</Button>
 			<Button className={`${showFor === 'world' ? 'selected' : null}`} onClick={() => setShowFor('world')}>World</Button>
 			<p>SHOWING FOR: {showFor}</p>
@@ -268,34 +275,34 @@ const Button = styled.button`
 	}
 `
 
-const OneMatch = styled.div`
-	border: 1px solid black;
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 4px;
-	margin-bottom: 10px;
-`
+// const OneMatch = styled.div`
+// 	border: 1px solid black;
+// 	max-width: 500px;
+// 	margin-left: auto;
+// 	margin-right: auto;
+// 	border-radius: 4px;
+// 	margin-bottom: 10px;
+// `
 
-const TableStyled = styled.table`
-	margin: 0 auto;
-	border-collapse: collapse;
-	margin-bottom: 20px;
+// const TableStyled = styled.table`
+// 	margin: 0 auto;
+// 	border-collapse: collapse;
+// 	margin-bottom: 20px;
 
-	td, th {
-		border: 1px solid black;
-		text-align: center;
-		padding: 5px;
-	}
-	th {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		max-width: 145px;
-	}
-	td {
-		&.bold {
-			font-weight: 700;
-		}
-	}
-`
+// 	td, th {
+// 		border: 1px solid black;
+// 		text-align: center;
+// 		padding: 5px;
+// 	}
+// 	th {
+// 		white-space: nowrap;
+// 		overflow: hidden;
+// 		text-overflow: ellipsis;
+// 		max-width: 145px;
+// 	}
+// 	td {
+// 		&.bold {
+// 			font-weight: 700;
+// 		}
+// 	}
+// `

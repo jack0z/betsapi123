@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import Highlighter from 'react-highlight-words';
+import styled from 'styled-components'
+
 
 const TableView = ({ data }) => {
   const [searchText, setSearchText] = useState('');
@@ -90,7 +92,7 @@ const TableView = ({ data }) => {
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          highlightStyle={{ backgroundColor: '#ffc069', padding: '4px' }}
           searchWords={[searchText]}
           autoEscape
           textToHighlight={text ? text.toString() : ''}
@@ -238,7 +240,17 @@ const TableView = ({ data }) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return <TableStyled columns={columns} dataSource={data} />;
 };
 
-export default TableView;
+export default TableView
+
+const TableStyled = styled(Table)`
+  tbody {
+    tr:nth-child(2n) {
+      background-color: silver;
+      &:hover {
+      }
+    }
+  }
+`
