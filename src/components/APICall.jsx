@@ -40,7 +40,7 @@ const APICall = () => {
 						.then((eventData) => {
 							if (eventData?.data?.results[0]) {
 								const detailedData = eventData.data.results[0];
-								if (Object.keys(detailedData.stats).length && Object.keys(detailedData.timer).length) {
+								if (Object.keys(detailedData.stats).length && Object.keys(detailedData.timer).length && detailedData.league.id !== '25067' && detailedData.league.id !== '23105') {
 									console.log('Adding for id: ', detailedData.id, detailedData)
 									// If USA country then push in separate array.
 									// Add only if stats and timer objects are not empty
@@ -170,7 +170,7 @@ const APICall = () => {
 			let bonusPassed = !filters.includes('bonus') || (parseInt(item.foulsHome) >= 4 || parseInt(item.foulsAway) >= 4)
 			let totalsPassed = !filters.includes('totals') || (item.bet365Odds && item.bet365OddsHandicap && parseInt(item.bet365OddsHandicap) - item.scoreTotal < 17)
 			// let totalsPassed = true;
-			let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '4' && parseInt((item.timer.tm) >= 4))
+			let timePassed = !filters.includes('time') || (parseInt(item.quarter) === 4)
 			// let timePassed = !filters.includes('time') || (parseInt(item.quarter) === '3')
 			return spreadPassed && totalsPassed && timePassed && bonusPassed
 		});
@@ -180,7 +180,7 @@ const APICall = () => {
 		{ label: 'Spread 3-10', value: 'spread'},
 		{ label: 'Bonus (4+)', value: 'bonus'},
 		{ label: 'Game Totals vs Score < 17', value: 'totals'}, 
-		{ label: '4th Q 4min', value: 'time'}, 
+		{ label: '4th Q', value: 'time'}, 
 	]
 
 	console.log('matchesToShow:', matchesToShow)

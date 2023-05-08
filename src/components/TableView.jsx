@@ -170,6 +170,20 @@ const TableView = ({ data }) => {
       ...getColumnSearchProps('foulsAway'),
       render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
     },
+    {
+      width: '5%',
+      title: 'freeThrowsRateHome',
+      dataIndex: 'freeThrowsRateHome',
+      key: 'freeThrowsRateHome',
+      ...getColumnSearchProps('freeThrowsRateHome'),
+    },
+		{
+      width: '5%',
+      title: 'freeThrowsRateAway',
+      dataIndex: 'freeThrowsRateAway',
+      key: 'freeThrowsRateAway',
+      ...getColumnSearchProps('freeThrowsRateAway'),
+    },
 		{
       width: '5%',
       title: '2 Points Home',
@@ -211,20 +225,6 @@ const TableView = ({ data }) => {
       dataIndex: 'freeThrowsAway',
       key: 'freeThrowsAway',
       ...getColumnSearchProps('freeThrowsAway'),
-    },
-		{
-      width: '5%',
-      title: 'freeThrowsRateHome',
-      dataIndex: 'freeThrowsRateHome',
-      key: 'freeThrowsRateHome',
-      ...getColumnSearchProps('freeThrowsRateHome'),
-    },
-		{
-      width: '5%',
-      title: 'freeThrowsRateAway',
-      dataIndex: 'freeThrowsRateAway',
-      key: 'freeThrowsRateAway',
-      ...getColumnSearchProps('freeThrowsRateAway'),
     },
 		{
       width: '5%',
