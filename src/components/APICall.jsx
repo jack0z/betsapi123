@@ -27,7 +27,7 @@ const APICall = () => {
 
 	const fetchInplayEvents = async () => {
 		try {
-			const response = await axios.get(`https://your-vercel-app-url.vercel.app/api/proxy?apiUrl=https://api.b365api.com/v3/events/inplay&sport_id=18`);
+			const response = await axios.get('/api/proxy?apiUrl=https://api.b365api.com/v3/events/inplay&sport_id=18');
 			// const response = await axios.get('https://api.b365api.com/v3/events/inplay?sport_id=18&token=154761-g9sYpS0kbXfwrV');
 			return response.data.results;
 		} catch (error) {
@@ -38,7 +38,7 @@ const APICall = () => {
 	
 	const fetchEventDetails = async (eventId) => {
 		try {
-			const response = await axios.get(`https://your-vercel-app-url.vercel.app/api/proxy?apiUrl=https://api.b365api.com/v1/event/view&event_id=${eventId}`);
+			const response = await axios.get(`/api/proxy?apiUrl=https://api.b365api.com/v1/event/view&event_id=${eventId}`);
 			// const response = await axios.get(`https://api.b365api.com/v1/event/view?token=154761-g9sYpS0kbXfwrV&event_id=${eventId}`);
 			return response.data.results[0];
 		} catch (error) {
