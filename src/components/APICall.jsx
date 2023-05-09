@@ -24,7 +24,7 @@ const APICall = () => {
 		const filteredResults = filterData(filtersSelected, showFor === 'world' ? allWorldMatches : allUSAMatches)
 		setMatchesToShow(filteredResults)
 	}, [filtersSelected])
-
+ 
 	const updateData = async () => {
 		axios.get('/api/proxy?apiUrl=https://api.b365api.com/v3/events/inplay&sport_id=18')
 		.then((res) => {
