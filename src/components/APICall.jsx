@@ -26,7 +26,7 @@ const APICall = () => {
 	}, [filtersSelected])
 
 	const updateData = async () => {
-		axios.get('https://api.b365api.com/v3/events/inplay?sport_id=18&token=154761-g9sYpS0kbXfwrV')
+		axios.get('/api/proxy?apiUrl=https://api.b365api.com/v3/events/inplay&sport_id=18')
 		.then((res) => {
 			if (res?.data?.results) {
 				const filledWorldData = [];
@@ -36,7 +36,7 @@ const APICall = () => {
 				// or do another call now for each of them
 				// For each of them sent the even view
 				fetchedData.forEach((singleData, index) => {
-					axios.get(`https://api.b365api.com/v1/event/view?token=154761-g9sYpS0kbXfwrV&event_id=${singleData.id}`)
+					axios.get(`/api/proxy?apiUrl=https://api.b365api.com/v1/event/view&event_id=${singleData.id}`)
 						.then((eventData) => {
 							if (eventData?.data?.results[0]) {
 								const detailedData = eventData.data.results[0];
