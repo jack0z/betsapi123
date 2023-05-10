@@ -190,7 +190,8 @@ const APICall = () => {
 
 	const fetchBet365Odds = async (matchId) => {
 		try {
-			const response = await axios.get(`https://api.b365api.com/v2/event/odds?token=154761-g9sYpS0kbXfwrV&event_id=${matchId}`);
+			const response = await axios.get(`/api/proxy?apiUrl=https://api.b365api.com/v2/event/odds&event_id=${matchId}`);
+// 			const response = await axios.get(`https://api.b365api.com/v2/event/odds?token=154761-g9sYpS0kbXfwrV&event_id=${matchId}`);
 			if (
 				response.data &&
 				response.data.success === 1 &&
