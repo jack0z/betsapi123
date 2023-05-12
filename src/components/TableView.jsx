@@ -160,7 +160,19 @@ const TableView = ({ data }) => {
       dataIndex: 'foulsHome',
       key: 'foulsHome',
       ...getColumnSearchProps('foulsHome'),
-      render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
+      // render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
+      render: (text, record) => {
+        const foulsAway = record.foulsAway; // You can access foulsHome here
+        const bonusNumber = (record.awayName.includes('Women') || record.homeName.includes('Women')) ? 3 : 4;
+
+        // Use foulsHome in your render logic if needed
+        return (
+          <span style={{display: 'flex'}}>
+            {text} 
+            {parseInt(foulsAway) >= bonusNumber ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}
+          </span>
+        );
+      },
     },
 		{
       width: '5%',
@@ -168,7 +180,17 @@ const TableView = ({ data }) => {
       dataIndex: 'foulsAway',
       key: 'foulsAway',
       ...getColumnSearchProps('foulsAway'),
-      render: (text) => <span style={{display: 'flex'}}>{text} {parseInt(text) >= 4 ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}</span>,
+      render: (text, record) => {
+        const foulsHome = record.foulsHome; // You can access foulsHome here
+        const bonusNumber = (record.awayName.includes('Women') || record.homeName.includes('Women')) ? 3 : 4;
+        // Use foulsHome in your render logic if needed
+        return (
+          <span style={{display: 'flex'}}>
+            {text} 
+            {parseInt(foulsHome) >= bonusNumber ? <Tag style={{fontSize: '0.7rem', marginLeft: '3px'}} color={'red'}>BONUS</Tag> : ''}
+          </span>
+        );
+      },
     },
     {
       width: '5%',

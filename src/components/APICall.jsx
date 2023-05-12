@@ -87,24 +87,25 @@ const APICall = () => {
 	
 		const filledWorldData = [];
 		const filledUSAData = [];
-	
-		eventDetails.forEach((detailedData) => {
-			if (
-				detailedData &&
-				Object.keys(detailedData.stats).length &&
-				Object.keys(detailedData.timer).length &&
-				detailedData.league.id !== '25067' &&
-				detailedData.league.id !== '23105'
-			) {
-				const convertedObject = processEventData(detailedData);
-	
-				if (detailedData.league.cc === 'us') {
-					filledUSAData.push(convertedObject);
-				} else {
-					filledWorldData.push(convertedObject);
+		if (eventDetails.length > 0) {
+			eventDetails.forEach((detailedData) => {
+				if (
+					detailedData &&
+					Object.keys(detailedData.stats).length &&
+					Object.keys(detailedData.timer).length &&
+					detailedData.league.id !== '25067' &&
+					detailedData.league.id !== '23105'
+				) {
+					const convertedObject = processEventData(detailedData);
+		
+					if (detailedData.league.cc === 'us') {
+						filledUSAData.push(convertedObject);
+					} else {
+						filledWorldData.push(convertedObject);
+					}
 				}
-			}
-		});
+			});
+		}
 	
 		console.log('Filled data: ', filledWorldData, filledUSAData);
 	
@@ -191,7 +192,7 @@ const APICall = () => {
 	const fetchBet365Odds = async (matchId) => {
 		try {
 			const response = await axios.get(`/api/proxy?apiUrl=https://api.b365api.com/v2/event/odds&event_id=${matchId}`);
-// 			const response = await axios.get(`https://api.b365api.com/v2/event/odds?token=154761-g9sYpS0kbXfwrV&event_id=${matchId}`);
+			// const response = await axios.get(`https://api.b365api.com/v2/event/odds?token=154761-g9sYpS0kbXfwrV&event_id=${matchId}`);
 			if (
 				response.data &&
 				response.data.success === 1 &&
