@@ -18,12 +18,12 @@ const APICall = () => {
 
 	useEffect(() => {
 		showFor === 'world' ? setMatchesToShow(filterData(filtersSelected, allWorldMatches)) : setMatchesToShow(filterData(filtersSelected, allUSAMatches))
-	}, [showFor])
+	}, [showFor, allUSAMatches, allWorldMatches, filtersSelected])
 
 	useEffect(() => {
 		const filteredResults = filterData(filtersSelected, showFor === 'world' ? allWorldMatches : allUSAMatches)
 		setMatchesToShow(filteredResults)
-	}, [filtersSelected])
+	}, [filtersSelected, allUSAMatches, allWorldMatches, showFor])
 
 	const fetchInplayEvents = async () => {
 		try {

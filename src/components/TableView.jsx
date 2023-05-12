@@ -242,7 +242,11 @@ const TableView = ({ data }) => {
     },
   ];
 
-  return <TableStyled columns={columns} dataSource={data} />;
+  return <TableStyled
+      columns={columns}
+      dataSource={data}
+      pagination={{ pageSize: 100 }}
+    />;
 };
 
 export default TableView
